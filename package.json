@@ -9,6 +9,7 @@
   "author": "Unixson",
   "license": "MIT",
   "dependencies": {
+    "config.json": "0.0.4",
     "express": "^4.16.2",
     "mongodb": "^3.0.2",
     "simcom": "^0.3.0",
@@ -17,5 +18,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/steveunixson/calling"
-}
+  }
 }
