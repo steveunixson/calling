@@ -1,0 +1,21 @@
+{
+  "name": "calling",
+  "version": "0.0.1",
+  "description": "software for call centers",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "author": "Unixson",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2",
+    "mongodb": "^3.0.2",
+    "simcom": "^0.3.0",
+    "socket.io": "^2.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/steveunixson/calling"
+}
+}
