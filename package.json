@@ -9,11 +9,14 @@
   "author": "Unixson",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "config.json": "0.0.4",
+    "connect": "^3.6.5",
     "express": "^4.16.2",
     "mongodb": "^3.0.2",
     "simcom": "^0.3.0",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.0.4",
+    "winston": "^2.4.0"
   },
   "repository": {
     "type": "git",
