@@ -25,6 +25,7 @@ var Clients = new Schema({
     age: { type: Number, min: 18, index: true },
     num: { type: Number, match: /[0-9]/ },
     date: { type: Date, default: Date.now },
+    bio: { type: String, },
     buff: Buffer
 });
 
