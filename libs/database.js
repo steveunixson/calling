@@ -26,6 +26,7 @@ var Clients = new Schema({
     num: { type: Number, match: /[0-9]/ },
     date: { type: Date, default: Date.now },
     bio: { type: String, },
+    commment: {type: String,},
     buff: Buffer
 });
 
