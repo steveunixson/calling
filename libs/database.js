@@ -25,15 +25,11 @@ var Clients = new Schema({
     age: { type: Number, min: 18, index: true },
     num: { type: Number, match: /[0-9]/ },
     date: { type: Date, default: Date.now },
-    bio: { type: String, }, 
+    bio: { type: String, },
+    comment: { type: String,},
+    base: { type: Boolean,},
     buff: Buffer
 });
 
-var Comments = new Schema({
-    comment: { type: String,}
-});
-
 var ClientModel = mongoose.model('Clients', Clients);
-var CommentModel = mongoose.model('Comments', Comments);
 module.exports = ClientModel;
-module.exports = CommentModel;
