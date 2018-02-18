@@ -23,7 +23,7 @@ var Schema = mongoose.Schema,
 var Clients = new Schema({
     name: { type: String, },
     age: { type: Number, min: 18, index: true },
-    bio: { type: String, match: /[a-z]/ },
+    num: { type: Number, match: /[0-9]/ },
     date: { type: Date, default: Date.now },
     buff: Buffer
 });

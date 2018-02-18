@@ -19,7 +19,20 @@ router.get('/api/numbers', function(req, res) {
 });
 
 router.get('/api/numbers/:id', function(req, res) {
-  res.send('This is not implemented now');
+  //res.send('This is not implemented now');
+  return ClientModel.findById(req.params.id, function (err, clients) {
+    if(!clients) {
+        res.statusCode = 404;
+        return res.send({ error: 'Not found' });
+    }
+    if (!err) {
+        return res.send({ status: 'OK', client:client });
+    } else {
+        res.statusCode = 500;
+        log.error('Internal error(%d): %s',res.statusCode,err.message);
+        return res.send({ error: 'Server error' });
+    }
+  });
 });
 
 router.post('/api/numbers', function(req, res) {
