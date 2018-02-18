@@ -1,7 +1,7 @@
 var express         = require('express');
 var comments        = express.Router();
 var log             = require('../libs/log')(module);
-var ClientModel     = require('../libs/database');
+var CommentModel     = require('../libs/database');
 var methodOverride  = require('method-override')
 comments.use(methodOverride('_method'))
 
