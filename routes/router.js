@@ -1,35 +1,37 @@
-var express = require('express');
-var router = express.Router();
-var log = require('../libs/log')(module);
+var express         = require('express');
+var router          = express.Router();
+var log             = require('../libs/log')(module);
+var ClientModel    = require('../libs/database');
+var methodOverride  = require('method-override')
+router.use(methodOverride('_method'))
 
-router.get('/', function(req, res,) {
-  res.send('hello express');
+router.get('/api/numbers', function(req, res) {
+  //res.send('This is not implemented now');
+  return ClientModel.find(function (err, clients) {
+    if (!err) {
+        return res.send(clients);
+    } else {
+        res.statusCode = 500;
+        log.error('Internal error(%d): %s',res.statusCode,err.message);
+        return res.send({ error: 'Server error' });
+    }
+  });
 });
 
-router.post('/api/phone/cold', function(req, res) {
-  var name = req.body.name;
-  var geo = req.body.geo;
-  var num = req.body.num;
-  var age = req.body.age;
-  var notes = req.body.notes;
-  res.send('submited cold');
-  log.debug(name + ' ' + geo + ' ' + num + ' ' + age + ' ' + notes);
+router.get('/api/numbers/:id', function(req, res) {
+  res.send('This is not implemented now');
 });
 
-router.post('/api/phone/hot', function(req, res) {
-  var name = req.body.name;
-  var geo = req.body.geo;
-  var num = req.body.num;
-  var age = req.body.age;
-  var notes = req.body.notes;
-  res.send('submited hot');
-  log.debug(name + ' ' + geo + ' ' + num + ' ' + age + ' ' + notes);
+router.post('/api/numbers', function(req, res) {
+  res.send('This is not implemented now');
 });
 
-router.use(function timeLog(req, res, next) {
-  console.log('Time: ', Date.now());
-  next();
+router.put('/api/numbers/:id', function (req, res){
+  res.send('This is not implemented now');    
 });
 
+router.delete('/api/numbers/:id', function (req, res){
+  res.send('This is not implemented now');
+});
 
 module.exports = router;
