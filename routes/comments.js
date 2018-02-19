@@ -1,12 +1,12 @@
 var express         = require('express');
 var comments        = express.Router();
 var log             = require('../libs/log')(module);
-var ClientsModel    = require('../libs/database');
+var CommentModel    = require('../libs/comments.model');
 var methodOverride  = require('method-override')
 comments.use(methodOverride('_method'))
 
 comments.get('/api/comments/', function (req, res){
-    return ClientsModel.find(function (err, comment) {
+    return CommentModel.find(function (err, comment) {
         if (!err) {
             return res.send(comment);
         } else {
@@ -23,9 +23,10 @@ comments.get('/api/comments/:id', function (req, res){
 
 comments.post('/api/comments/', function (req, res){
     //res.send('This endpoint should add comments to clients');
-    var comment = new ClientsModel({
-        comment: req.body.comment,
-        base: req.body.base,
+    var comment = new CommentModel({
+        comment:    req.body.comment,
+        name:       req.body.name,
+        base:       req.body.base
     });
     
     comment.save(function (err) {
