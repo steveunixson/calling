@@ -11,9 +11,9 @@ var bodyParser      = require('body-parser');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-app.use(router);
 app.use(comments);
+app.use(router);
+
 //------error handler
 app.use(function(req, res, next){
   res.status(404);
