@@ -23,6 +23,7 @@ var operator            = require('./app/routes/operators');
 var login               = require('./app/login');
 var config              = require('config.json')('app/config/config.json');
 
+
 // configuration ===============================================================
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
@@ -56,7 +57,6 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 app.use(router);
 app.use(operator);
 app.use(comments);
-app.use(login);
 // routes ======================================================================
 require('./app/login')(app, passport); // load our routes and pass in our app and fully configured passport
 app.use(error);
