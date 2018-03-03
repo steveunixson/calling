@@ -1,6 +1,6 @@
 {
     "webhost": "127.0.0.1",
     "mongoose": {
-          "uri": "mongodb://localhost/calling"
+          "uri": "mongodb://localhost/calling-v2"
       }
   }

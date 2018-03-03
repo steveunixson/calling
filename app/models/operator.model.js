@@ -1,11 +1,9 @@
-var log = require('./log')(module);
-var config = require('config.json')('./config/config.json');
+var log = require('../../libs/log')(module);
+var config = require('config.json')('app/config/config.json');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.set('debug', true);
-mongoose.connect(config.mongoose.uri, {
-  //useMongoClient: true,
-});
+mongoose.connect(config.mongoose.uri, {});
 //-------------------ERROR HANDLER---------------//
 var db = mongoose.connection;
 
@@ -20,7 +18,7 @@ db.once('open', function callback () {
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
  
-var Clients = new Schema({
+var Operators = new Schema({
     name: { type: String, },
     age: { type: Number, min: 18, index: true },
     num: { type: Number, match: /[0-9]/ },
@@ -29,6 +27,6 @@ var Clients = new Schema({
     buff: Buffer
 });
 
-var ClientModel = mongoose.model('Clients', Clients);
+var OperatorModel = mongoose.model('Operators', Operators);
 
-module.exports = ClientModel;
+module.exports = OperatorModel;

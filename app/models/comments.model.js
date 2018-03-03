@@ -1,11 +1,11 @@
-var log = require('./log')(module);
-var config = require('config.json')('./config/config.json');
+var log = require('../../libs/log')(module);
+var config = require('config.json')('app/config/config.json');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.set('debug', true);
 mongoose.connect(config.mongoose.uri, {
-  //useMongoClient: true,
-});
+    //useMongoClient: true,
+  });
 //-------------------ERROR HANDLER---------------//
 var db = mongoose.connection;
 

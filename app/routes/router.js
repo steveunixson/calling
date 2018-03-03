@@ -1,7 +1,7 @@
 var express         = require('express');
 var router          = express.Router();
-var log             = require('../libs/log')(module);
-var ClientModel     = require('../libs/database');
+var log             = require('../../libs/log')(module);
+var ClientModel     = require('../models/client.model');
 var methodOverride  = require('method-override')
 router.use(methodOverride('_method'))
 
