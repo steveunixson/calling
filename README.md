@@ -11,6 +11,34 @@ This is an API for calling application. Powered by Modular Magnetix
 
 ## Wiki
 
-TODO: add API reference
+API reference
 
+GET /api/operator/
+GET /api/operator/:id
+POST /api/operator/
 
+GET /api/comments/
+POST /api/comments/
+
+GET /api/numbers
+GET /api/numbers:id
+POST /api/numbers
+
+POST /api/operator 
+
+ name: { type: String, },
+    age: { type: Number, min: 18, index: true },
+    num: { type: Number, match: /[0-9]/ },
+    bio: { type: String, },
+
+POST /api/comments/
+ 
+ comment: String,
+    name: String,
+    base: String
+
+POST /api/numbers
+
+age: { type: Number, min: 18, index: true },
+    num: { type: Number, match: /[0-9]/ },
+    bio: { type: String, },
