@@ -22,7 +22,10 @@ var error               = require('./libs/error')
 var comments            = require('./app/routes/comments');
 var router              = require('./app/routes/router');
 var operator            = require('./app/routes/operators');
+var admins              = require('./app/routes/admin');
+var adminsMongo         = require('./app/routes/admin.mongo');
 var login               = require('./app/login');
+var generator           = require('./app/middleware/generator');
 var config              = require('config.json')('app/config/config.json');
 
 // configuration ===============================================================
@@ -57,8 +60,11 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 app.use(router);
 app.use(operator);
+app.use(admins);
+//app.use(adminsMongo); STILL UNDER HEAVIY DEVELOPMENT
+//so dont touch!
 app.use(comments);
-//app.use(serve(__dirname + '/public'));
+app.use(generator);
 app.use(express.static(path.join(__dirname, 'public')));
 // routes ======================================================================
 require('./app/login')(app, passport); // load our routes and pass in our app and fully configured passport
