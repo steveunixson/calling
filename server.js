@@ -1,76 +1,36 @@
-// server.js
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const passport = require('passport');
+const port = process.env.PORT || 8080;
+const log = require('./libs/log')(module);
+const error = require('./libs/error');
+const env = process.env.NODE_ENV || 'development';
+const config = require('./config');
+const fileUpload = require('express-fileupload');
+const uploadController = require('./controllers/upload');
 
-// set up ======================================================================
-// get all the tools we need
-var express             = require('express');
-var app                 = express();
-var serve               = require('express-static');
-var path                = require('path');
-var port                = process.env.PORT || 8080;
-var mongoose            = require('mongoose');
-var passport            = require('passport');
-var flash               = require('connect-flash');
+const app = express();
+app.use(fileUpload());
 
-var morgan              = require('morgan');
-var log                 = require('./libs/log')(module);
-var cookieParser        = require('cookie-parser');
-var bodyParser          = require('body-parser');
-var session             = require('express-session');
-var logger              = require('express-logger');
 
-var error               = require('./libs/error')
-var comments            = require('./app/routes/comments');
-var router              = require('./app/routes/router');
-var operator            = require('./app/routes/operators');
-var admins              = require('./app/routes/admin');
-var adminsMongo         = require('./app/routes/admin.mongo');
-var login               = require('./app/login');
-var generator           = require('./app/middleware/generator');
-var config              = require('config.json')('app/config/config.json');
-
-// configuration ===============================================================
-var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
-mongoose.set('debug', true);
-mongoose.connect(config.mongoose.uri, {
-    
-  }); // connect to our database
-
-require('./app/config/passport')(passport); // pass passport for configuration
-
-// set up our express application
-app.use(morgan('dev')); // log every request to the console
-app.use(logger({path: "logfile.txt"}));
-
-app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser.json()); // get information from html forms
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.set('view engine', 'ejs'); // set up ejs for templating
-
-// required for passport
-app.use(session({
-    secret: 'ilovescotchscotchyscotchscotch', // session secret
-    resave: true,
-    saveUninitialized: true
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
 }));
+
+// Use express session support since OAuth2orize requires it
+app.use(session({
+  secret: 'kjkszpg',
+  saveUninitialized: true,
+  resave: true
+}));
+
 app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
 
-app.use(router);
-app.use(operator);
-app.use(admins);
-//app.use(adminsMongo); STILL UNDER HEAVIY DEVELOPMENT
-//so dont touch!
-app.use(comments);
-app.use(generator);
-app.use(express.static(path.join(__dirname, 'public')));
-// routes ======================================================================
-require('./app/login')(app, passport); // load our routes and pass in our app and fully configured passport
+app.post('/admin/upload',uploadController.postUpload);
+
 app.use(error);
-// static ======================================================================
-
-// launch ======================================================================
-app.listen(port);
 log.info('The magic happens on port ' + port);
+app.listen(port);
