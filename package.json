@@ -47,7 +47,8 @@
     "passport-local": "^1.0.0",
     "save-to-mongo": "^1.0.0",
     "winston": "^2.4.0",
-    "xlsx": "0.9.11"
+    "xlsx": "0.9.11",
+    "xlsx-to-json": "^0.3.0"
   },
   "devDependencies": {
     "babel-eslint": "~7.2.1",

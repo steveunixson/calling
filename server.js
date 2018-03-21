@@ -12,8 +12,6 @@ const fileUpload = require('express-fileupload');
 const uploadController = require('./controllers/upload');
 
 const app = express();
-app.use(fileUpload());
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -29,6 +27,7 @@ app.use(session({
 
 app.use(passport.initialize());
 
+app.use(fileUpload());
 app.post('/admin/upload',uploadController.postUpload);
 
 app.use(error);
