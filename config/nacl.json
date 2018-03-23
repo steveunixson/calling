@@ -1,0 +1,22 @@
+[
+  {
+    "group": "admin",
+    "permissions": [
+      {
+        "resource": "*",
+        "methods": "*",
+        "action": "allow"
+      }
+    ]
+  },
+  {
+    "group": "user1",
+    "permissions": [
+      {
+        "resource": "admin",
+        "methods": "*",
+        "action": "deny"
+      }
+    ]
+  }
+]
