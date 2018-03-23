@@ -106,6 +106,17 @@ app.get('/admin/users', userController.getUsers);
 
 app.get('/manager/upload',authController.isAuthenticated, requireRole('manager') ,uploadController.getUpload); //get collections name
 app.post('/workspace/call', authController.isAuthenticated, requireRole('admin') ,operatorController.getPhone); //get number by _id and collection name
+app.get('/workspace/status', authController.isAuthenticated, requireRole('admin'), operatorController.getStatus);
+app.post('/workspace/status',authController.isAuthenticated, requireRole('admin'), operatorController.postStatus);
+
+app.get('/manager/download/xlsx',authController.isAuthenticated, requireRole('manager'), function(req, res){
+  var file = __dirname + '/tmp/templates/База.xlsx';
+  res.download(file); // Set disposition and send it.
+})
+app.get('/manager/download/script',authController.isAuthenticated, requireRole('manager'), function(req, res){
+  var file = __dirname + '/tmp/templates/Скрипт.xlsx';
+  res.download(file); // Set disposition and send it.
+})
 
 app.use(error);
 log.info('The magic happens on port ' + port);

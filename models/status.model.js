@@ -1,10 +1,8 @@
 var log = require('../libs/log')(module);
-var config = require('../../app/config');
+var config = require('../config');
 var env = process.env.NODE_ENV || 'development';
 var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
-mongoose.set('debug', true);
-var autoIncrement = require('mongoose-auto-increment');
+
 var connection = mongoose.createConnection(config.db);
 log.debug('connetction created at :' + config.db);
 //mongoose.connect(config.mongoose.uri, {});
@@ -23,42 +21,45 @@ db.once('open', function callback () {
 
 var Schema = mongoose.Schema;
 
-autoIncrement.initialize(connection);
-
 var Status = new Schema({
     
         no_answer:  {
-          type:String,
-          default: ''
+          type:Boolean,
+          required: true
         },
         no_connect: {
-          type:String,
-          default: ''
+          type:Boolean,
+          required: true
         },
         deny:       {
-          type:String,
-          default: ''
+          type:Boolean,
+          required: true
         },
         callback:   {
-          type:String,
-          default: ''
+          type:String
         },
         appointment: {
-          type:String,
-          default: ''
+          type:Boolean,
+          required: true
         },
+
+        client: {
+          type: String,
+          required: true
+        },
+        number: {type: Number,
+          required: true,
+          index: {unique: true}},
+
         appointment_time: String,
         age:              Number,
-        comment:          String,
-        came:          {type:String, default: ''},
+        came:             Boolean,
         month:            String,
         close:            String,
         operator:         String,
-        comment:      String
+        comment:          String
 });
   
-Status.plugin(autoIncrement.plugin, 'Status');
-
 var StatusModel = mongoose.model('Status', Status);
 
 module.exports = StatusModel;
